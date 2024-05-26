@@ -3,41 +3,17 @@ from motor_control import move,enable,disable
 import RPi.GPIO as GPIO
 localIP = "192.168.68.71"
 localPort   =  20001
-
 bufferSize  = 1024
-
- 
-
 msgFromServer       = "itt a kezem"
-
 bytesToSend         = str.encode(msgFromServer)
-
- 
-
-# Create a datagram socket
-
 UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-
- 
-
-# Bind to address and ip
-
 UDPServerSocket.bind((localIP, localPort))
-
-#UDPServerSocket.settimeout(0.02) 
 UDPServerSocket.setblocking(0)
 print("UDP server up and listening")
-
- 
-
-# Listen for incoming datagrams
-#enable(3)
 clientMsg=""
 stepsPerSec = 800
 step = 1
 degrees = 40
-
-
 while(True):
 	try:
 		bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
@@ -47,19 +23,18 @@ while(True):
 		print("socket received: "+clientMsg)
 	except:
 		pass
-
-	#address = bytesAddressPair[1]
 	if(clientMsg =="1" or clientMsg =="2"):
-		#enable(3)
 		if(degrees>0):
 			direction = 1
 		if (degrees<0):
 			direction = 2
 		if(clientMsg == "1"):
 			move(direction,step,1,stepsPerSec,degrees)
+			pass
 			#print("moving up")
 		elif(clientMsg == "2"):
 			move(direction,step,2,stepsPerSec,degrees)
+			pass
 			#print("moving down")
 	if(clientMsg=="5"):
 		disable(1)
@@ -91,13 +66,3 @@ while(True):
 	if(clientMsg[:3]=="deg"):
 		degrees = float(clientMsg[3:])
 		print("received new degrees "+str(degrees))
-	#       print("connection check packet received from"+str(address))
-
-	#clientIP  = "Client IP Address:{}".format(address)
-
-	#print(clientMsg)
-	#print(clientIP)
-
-   
-
-	# Sending
