@@ -1,0 +1,37 @@
+12/16/2020
+i finally set up the Pi today after buying the SD card
+i set up the Pi in the non-gui mode an dim using ssh 
+starting work tommorow 
+need to solder the pins first 
+12/29/2020
+did the soldering today with the optocouplers everything works great
+i know its late but I had fun with Kotaro and Grego:)
+i made a blink program next ill do the real thing hopefully 
+the Pi is fine now I hope i wont fry it 
+ill probably make some sort of case for it
+SSH works great btw
+fried on of the controllers
+1/12/2021
+doing it again with 1 controller 
+will buy one later
+im going to make full autoguiding program i think 
+1/24/2021
+received new controllers 
+26/7/2021
+mi az isten tortent
+szoval megcsinaltam a repulot 
+elkezdtem bulizni 
+meg szerelmeskedni 
+most megcsinalni 
+12/27/2021
+sok volt a suli 
+de most megcsinalom esku 
+es fel is szedem esku 
+megy a motor
+felteszek meg 7 GPIO-t
+megcsinalom a tracket es a gotot
+12/30/2021
+feltettem az osszes GPIO
+megy a program fel le 
+megy a track 
+
