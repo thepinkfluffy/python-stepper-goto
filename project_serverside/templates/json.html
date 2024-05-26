@@ -1,0 +1,314 @@
+{% with messages = get_flashed_messages() %}
+   {% if messages %}
+      {% for msg in messages %}
+         <h>{{ msg }}</h>
+      {% endfor %}
+   {% endif %}
+{% endwith %}
+<html>
+<head>
+{{turbo}}
+</head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+        $(function() {
+          $('a#test').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/up',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+<script type=text/javascript>
+        $(function() {
+          $('a#test2').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/down',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+<script type=text/javascript>
+        $(function() {
+          $('a#test3').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/left',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+<script type=text/javascript>
+        $(function() {
+          $('a#test4').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/right',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+
+<script type=text/javascript>
+        $(function() {
+          $('a#stop').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/stop',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+
+<script type=text/javascript>
+        $(function() {
+          $('a#speed1').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/speed1',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+<script type=text/javascript>
+        $(function() {
+          $('a#speed2').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/speed2',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+<script type=text/javascript>
+        $(function() {
+          $('a#speed3').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/speed3',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+<script type=text/javascript>
+        $(function() {
+          $('a#speed4').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/speed4',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+<script type=text/javascript>
+        $(function() {
+          $('a#speed5').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/speed5',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+
+<script type=text/javascript>
+        $(function() {
+          $('a#step1').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/step1',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+<script type=text/javascript>
+        $(function() {
+          $('a#step2').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/step2',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+<script type=text/javascript>
+        $(function() {
+          $('a#step3').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/step3',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+<script type=text/javascript>
+        $(function() {
+          $('a#step4').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/step4',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+
+
+
+
+
+<div class='container'>
+        <div style = "position:absolute;left:120px;top:50px">
+        <form>
+            <a href=# id=test><button class='btn btn-default'>Up</button></a>
+        </form>
+        </div>
+        <div style = "position:absolute;left:120px;top:200px">
+        <form>
+            <a href=# id=test2><button class='btn btn-default'>Down</button></a>
+        </form>
+        </div>
+        <div style = "position:absolute;left:20px;top:125px">
+        <form>
+            <a href=# id=test3><button class='btn btn-default'>Left</button></a>
+        </form>
+        </div>
+        <div style = "position:absolute;left:220px;top:125px">
+        <form>
+            <a href=# id=test4><button class='btn btn-default'>Right</button></a>
+        </form>
+        </div>
+
+        <div style = "position:absolute;left:115px;top:125px">
+        <form>
+            <a href=# id=stop><button class='btn btn-default'>STOP</button></a>
+        </form>
+        </div>
+        
+        <div style = "position:absolute;left:0px;top:300px">
+        <form>
+            <a href=# id=speed1><button class='btn btn-default'>Speed 1</button></a>
+        </form>
+        </div>
+        <div style = "position:absolute;left:100px;top:300px">
+        <form>
+            <a href=# id=speed2><button class='btn btn-default'>Speed 2</button></a>
+        </form>
+        </div>
+        <div style = "position:absolute;left:200px;top:300px">
+        <form>
+            <a href=# id=speed3><button class='btn btn-default'>Speed 3</button></a>
+        </form>
+        </div>
+        <div style = "position:absolute;left:300px;top:300px">
+        <form>
+            <a href=# id=speed4><button class='btn btn-default'>Speed 4</button></a>
+        </form>
+        </div>
+        <div style = "position:absolute;left:400px;top:300px">
+        <form>
+            <a href=# id=speed5><button class='btn btn-default'>Speed 5</button></a>
+        </form>
+        </div>
+
+              </div>
+        <div style = "position:absolute;left:0px;top:400px">
+        <form>
+            <a href=# id=step1><button class='btn btn-default'>Full Step</button></a>
+        </form>
+        </div>
+        <div style = "position:absolute;left:105px;top:400px">
+        <form>
+            <a href=# id=step2><button class='btn btn-default'>Half Step</button></a>
+        </form>
+        </div>
+        <div style = "position:absolute;left:210px;top:400px">
+        <form>
+            <a href=# id=step3><button class='btn btn-default'>Quarter Step</button></a>
+        </form>
+        </div>
+        <div style = "position:absolute;left:340px;top:400px">
+        <form>
+            <a href=# id=step4><button class='btn btn-default'>Eighth Step</button></a>
+        </form>
+        </div>
+            </div>
+        <div style = "position:absolute;left:0px;top:700px">
+        <form>
+            <a href=# id=refresh><button class='btn btn-default'>refresh</button></a>
+        </form>
+        </div>
+
+        <div style = "position:absolute;left:0px;top:500px">
+        <b>Calibration data</b>
+        <form action="/data" method="POST">
+        <label>Declination: </label>
+        <input name="number">
+        <label>Right Ascension: </label>
+        <input name="number2">
+        <input type="submit">
+        </form>
+        </div>
+
+        <div style = "position:absolute;left:0px;top:650px">
+        <b>Goto data</b>
+        <form action="/gdata" method="POST">
+        <label>Declination: </label>
+        <input name="gnumber">
+        <label>Right Ascension: </label>
+        <input name="gnumber2">
+        <input type="submit">
+        </form>
+        </div>
+
+        <div style = "position:absolute;left:300px;top:100px">
+        
+        <form action="/ddata" method="POST">
+        <label>Degrees: </label>
+        <input name="dnumber">
+        <input type="submit">
+        </form>
+        </div>
+
+        <div style = "position:absolute;left:0px;top:800px">
+        <b>Current Declination: {{data1}}</b>
+        <b> Current Right Ascension: {{data2}}</b></div>
+        <b>{{msgg}}</b>
+
+
+
+
+        
+
+
+</div>
+</html>
