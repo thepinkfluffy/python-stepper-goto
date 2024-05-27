@@ -4,9 +4,8 @@ import threading
 import time
 
 app = Flask(__name__)
-
 app.secret_key = 'BardosAnyjaASzerelmem'
-pos = (0,0) #delta theta
+pos = (0,0)
 gopos = (0,0)
 motor1_displacement = 0
 motor2_displacement = 0

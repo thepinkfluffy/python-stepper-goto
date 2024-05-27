@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
-
+import sys
+#wiring
 step = 15
 direction = 14
 en = 21
@@ -9,38 +10,30 @@ ms2 =25
 ms1 =8
 step2 = 23
 dir2 = 18
-#enable2=14
 def anglesToSteps(alpha,stp):
 	return((2**(stp-1))*alpha/1.8)
-
-
+#gpio setup
 GPIO.setmode(GPIO.BCM)
-
 GPIO.setup(step,GPIO.OUT)
 GPIO.setup(direction,GPIO.OUT)
 GPIO.setup(en,GPIO.OUT)
-
 GPIO.setup(ms3,GPIO.OUT)
 GPIO.setup(ms2,GPIO.OUT)
 GPIO.setup(ms1,GPIO.OUT)
-
 GPIO.setup(step2,GPIO.OUT)
 GPIO.setup(dir2,GPIO.OUT)
-#GPIO.setup(enable2,GPIO.OUT)
-
-#GPIO.setup(ms3_2,GPIO.OUT)
-#GPIO.setup(ms2_2,GPIO.OUT)
-#GPIO.setup(ms1_2,GPIO.OUT)
+#Pulls the enable pin high. Puts controllers into sleep mode. 
 def disable(x):
 	if(x==1):
 		GPIO.output(en,GPIO.HIGH)
 	else:
-		raise Exception("yo that shit aint good|number has to be between 1 and 3 ")
+		raise Exception("Argument invalid.")
+#Pulls the enable pin low. Wakes up controllers. 
 def enable(x):
 	if(x==1):
 		GPIO.output(en,GPIO.LOW)
 	else:
-		raise Exception("yo that shit aint good|number has to be between 1 and 3 ")
+		raise Exception("Argument invalid.")
 
 def move(Direction,Speed,Motor,StepsPerSec,degrees):
 	#steps to degrees 
@@ -69,7 +62,7 @@ def move(Direction,Speed,Motor,StepsPerSec,degrees):
 			GPIO.output(ms2,GPIO.HIGH)
 			GPIO.output(ms3,GPIO.HIGH)
 	else:
-			raise Exception("number has to be between 1 and 5")
+			raise Exception("Argument invalid. Step numberhas to be between 1 and 5")
 		
 	if(Motor == 1):
 		if(Direction == 1):
@@ -77,7 +70,7 @@ def move(Direction,Speed,Motor,StepsPerSec,degrees):
 		elif(Direction == 2):
 			GPIO.output(direction,GPIO.LOW)
 		else:
-			raise Exception("number has to be between 1 and 2 ")
+			raise Exception("Argument invalid. Direction has to be between 1 and 2.")
 		for i in range(int(steps)):
 			GPIO.output(step,GPIO.LOW)
 			time.sleep(1/StepsPerSec)
@@ -90,14 +83,20 @@ def move(Direction,Speed,Motor,StepsPerSec,degrees):
 		elif(Direction == 2):
 			GPIO.output(dir2,GPIO.LOW)
 		else:
-			raise Exception("number has to be between 1 and 2 ")
+			raise Exception("Argument invalid. Direction has to be between 1 and 2.")
 		for i in range(int(steps)):
 			GPIO.output(step2,GPIO.LOW)
 			time.sleep(1/StepsPerSec)
 			GPIO.output(step2,GPIO.HIGH)
 			time.sleep(1/StepsPerSec)
 	else:
-		raise Exception("i only got 2 motors yo ")
+		raise Exception("Argument invalid. Motor selection has to be 1 or 2.")
 	disable(1)
+if (__name__ == __main__):
+	condition = sys.argv[1]
+	if (condition == "disable"):
+		disable(1)
+	else:
+		raise Exception("Argument invalid.")
 
 
