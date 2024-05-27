@@ -16,7 +16,10 @@ degrees = 40
 #rendering the HTML page which has the button
 def updateDegrees(degrees):
     mystring = "deg"+str(degrees)
-    sendMessage(mystring)
+    if (sendMessage(mystring) is True):
+        print("Confirmed updated degrees to "+str(degrees))
+    else:
+        print("Handshake not received. Check connection.")
 def moveTo(gopos):
     global pos
     print("going to " + str(gopos))
@@ -35,9 +38,15 @@ def moveTo(gopos):
     motor1_displacement = delta1/k1
     motor2_displacement = delta2/k2
     updateDegrees(motor1_displacement)
-    sendMessage("1")
+    if(sendMessage("1") is True):
+        print("Confirmed movement executed.")
+    else:
+        print("Handshake not received. Check connection.")
     updateDegrees(motor2_displacement)
-    sendMessage("2")
+    if(sendMessage("2") is True):
+        print("Confirmed movement executed.")
+    else:
+        print("Handshake not received. Check connection.")
     print("motor displacements: "+str(motor1_displacement,motor2_displacement))
     return pos
 
@@ -71,7 +80,10 @@ def up():
     updateDegrees(degrees)
     motor1_displacement += degrees
     print("going up")
-    sendMessage("1")
+    f(sendMessage("1") is True):
+        print("Confirmed movement executed.")
+    else:
+        print("Handshake not received. Check connection.")
     return redirect("/json")
 @app.route('/down')
 def down():
@@ -79,7 +91,10 @@ def down():
     updateDegrees(-degrees)
     motor1_displacement += -degrees
     print ("going down")
-    sendMessage("1")
+    if(sendMessage("1") is True):
+        print("Confirmed movement executed.")
+    else:
+        print("Handshake not received. Check connection.")
     return redirect("/json")
 @app.route('/left')
 def left():
@@ -87,7 +102,10 @@ def left():
     updateDegrees(degrees)
     motor2_displacement += degrees
     print ("going left")
-    sendMessage("2")
+    if(sendMessage("2") is True):
+        print("Confirmed movement executed.")
+    else:
+        print("Handshake not received. Check connection.")
     return redirect("/json")
 @app.route('/right')
 def right():
@@ -95,7 +113,10 @@ def right():
     updateDegrees(-degrees)
     motor2_displacement += -degrees
     print ("going right")
-    sendMessage("2")
+    if(sendMessage("2") is True):
+        print("Confirmed movement executed.")
+    else:
+        print("Handshake not received. Check connection.")
     return redirect("/json")
 @app.route('/stop')
 def stop():

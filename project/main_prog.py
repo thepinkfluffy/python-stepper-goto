@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 localIP = "192.168.68.71"
 localPort   =  20001
 bufferSize  = 1024
-msgFromServer       = "itt a kezem"
+msgFromServer       = "handshake"
 bytesToSend         = str.encode(msgFromServer)
 UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 UDPServerSocket.bind((localIP, localPort))
@@ -66,3 +66,8 @@ while(True):
 	if(clientMsg[:3]=="deg"):
 		degrees = float(clientMsg[3:])
 		print("received new degrees "+str(degrees))
+	try:
+		UDPServerSocket.sendto(bytesToSend ,address)
+		print("Confirmed.")
+	except:
+		print("Could not send handshake. Check connection.")
