@@ -19,11 +19,13 @@ def updateDegrees(degrees):
     sendMessage(mystring)
 def moveTo(gopos):
     global pos
+    print("going to " + str(gopos))
     #elso tengely
-    delta1 = abs(pos[0]-gopos[0])
+    delta1 = (pos[0]-gopos[0])
     motor1_displacement = 0
     #masodik tengely 
-    delta2 = abs(pos[1]-gopos[1])
+    delta2 = (pos[1]-gopos[1])
+    print("delta = "+str(delta1,delta2))
     motor2_displacement = 0
     #atalakitjuk a koordinatakat stepper fokokba
     f1 = 12 #amugy nem ennyi 
@@ -36,8 +38,7 @@ def moveTo(gopos):
     sendMessage("1")
     updateDegrees(motor2_displacement)
     sendMessage("2")
-    print("motor ")
-    print(motor1_displacement,motor2_displacement)
+    print("motor displacements: "+str(motor1_displacement,motor2_displacement))
     return pos
 
 @app.route('/refresh')
@@ -63,47 +64,43 @@ def json():
     pos = (pos[0]+motor1_displacement*k1,pos[1]+motor2_displacement*k2)
     motor1_displacement = 0
     motor2_displacement = 0
-    print(pos)
-    #if(sendMessage("0")):
-        #print("sheesh")
-        #flash("Connection checked","info")
     return render_template("json.html",data1 = pos[0], data2 = pos[1])
 @app.route('/up')
 def up():
     global motor1_displacement
     updateDegrees(degrees)
     motor1_displacement += degrees
+    print("going up")
     sendMessage("1")
-    print("up")
     return redirect("/json")
 @app.route('/down')
 def down():
     global motor1_displacement
     updateDegrees(-degrees)
     motor1_displacement += -degrees
+    print ("going down")
     sendMessage("1")
-    print ("down")
     return redirect("/json")
 @app.route('/left')
 def left():
     global motor2_displacement
     updateDegrees(degrees)
     motor2_displacement += degrees
+    print ("going left")
     sendMessage("2")
-    print ("left")
     return redirect("/json")
 @app.route('/right')
 def right():
     global motor2_displacement
     updateDegrees(-degrees)
     motor2_displacement += -degrees
+    print ("going right")
     sendMessage("2")
-    print ("right")
     return redirect("/json")
 @app.route('/stop')
 def stop():
     sendMessage("5")
-    print("stop")
+    print("Stopping, action interrupted. Recalibrate.")
     return redirect("/json")
 
 @app.route('/speed1')
@@ -111,35 +108,35 @@ def speed1():
     global speed
     speed  =2
     sendMessage("6")
-    print("speed1")
+    print("Step frequency changed to 100.")
     return redirect("/json")
 @app.route('/speed2')
 def speed2():
     global speed
     speed  =4
     sendMessage("7")
-    print("speed2")
+    print("Step frequency changed to 200.")
     return redirect("/json")
 @app.route('/speed3')
 def speed3():
     global speed
     speed  =8
     sendMessage("8")
-    print("speed3")
+    print("Step frequency changed to 300.")
     return redirect("/json")
 @app.route('/speed4')
 def speed4():
     global speed
     speed  =16
     sendMessage("9")
-    print("speed4")
+    print("Step frequency changed to 500.")
     return redirect("/json")
 @app.route('/speed5')
 def speed5():
     global speed
     speed  =32
     sendMessage("a")
-    print("speed5")
+    print("Step frequency changed to 800.")
     return redirect("/json")
 
 @app.route('/step1')
@@ -147,28 +144,28 @@ def step1():
     global step_num
     step_num = 1
     sendMessage("b")
-    #print("speed1")
+    print("Full step.")
     return redirect("/json")
 @app.route('/step2')
 def step2():
     global step_num
     step_num = 2
     sendMessage("c")
-    #print("speed2")
+    print("Half step.")
     return redirect("/json")
 @app.route('/step3')
 def step3():
     global step_num
     step_num = 4
     sendMessage("d")
-    #print("speed3")
+    print("Quarter step")
     return redirect("/json")
 @app.route('/step4')
 def step4():
     global step_num
     step_num = 8
     sendMessage("e")
-    #print("speed4")
+    print("Eighth step")
     return redirect("/json")
 
 @app.route('/data', methods=['POST'])
@@ -176,7 +173,7 @@ def get_calibration():
     global pos
     nums = (float(request.form['number']),float(request.form['number2']))
     pos = nums
-    print(nums, pos)
+    print("New calibration: "+str(nums, pos))
     return redirect("/json")
 @app.route('/gdata', methods=['POST'])
 def get_goto():
