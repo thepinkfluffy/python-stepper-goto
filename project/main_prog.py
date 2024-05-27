@@ -1,7 +1,12 @@
 import socket
 from motor_control import move,enable,disable
 import RPi.GPIO as GPIO
-localIP = "192.168.68.71"
+try:
+	myfile = open("./pyip.txt")
+	localIP = myfile.readline().rstrip()
+except:
+	print("cannot find pyip file")
+	exit()
 localPort   =  20001
 bufferSize  = 1024
 msgFromServer       = "handshake"
@@ -15,12 +20,16 @@ stepsPerSec = 800
 step = 1
 degrees = 40
 while(True):
+	isMessage = False
 	try:
 		bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
 		message = bytesAddressPair[0]
 		address = bytesAddressPair[1]
 		clientMsg = str(message)[2]
+		print(clientMsg)
 		print("socket received: "+clientMsg)
+		print("yes")
+		isMessage = True
 	except:
 		pass
 	if(clientMsg =="1" or clientMsg =="2"):
@@ -66,8 +75,10 @@ while(True):
 	if(clientMsg[:3]=="deg"):
 		degrees = float(clientMsg[3:])
 		print("received new degrees "+str(degrees))
-	try:
-		UDPServerSocket.sendto(bytesToSend ,address)
-		print("Confirmed.")
-	except:
-		print("Could not send handshake. Check connection.")
+	if (isMessage):
+		try:
+			UDPServerSocket.sendto(bytesToSend ,address)
+			print("Sent handshake.")
+			clientMsg = ""
+		except:
+			print("Could not send handshake. Check connection.")

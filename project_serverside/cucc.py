@@ -1,3 +1,4 @@
+
 from flask import Flask, redirect, url_for , render_template, flash, request 
 from udp_test import sendMessage
 import threading
@@ -15,6 +16,7 @@ degrees = 40
 #rendering the HTML page which has the button
 def updateDegrees(degrees):
     mystring = "deg"+str(degrees)
+    sendMessage(mystring)
     if (sendMessage(mystring) is True):
         print("Confirmed updated degrees to "+str(degrees))
     else:
@@ -79,7 +81,7 @@ def up():
     updateDegrees(degrees)
     motor1_displacement += degrees
     print("going up")
-    f(sendMessage("1") is True):
+    if(sendMessage("1") is True):
         print("Confirmed movement executed.")
     else:
         print("Handshake not received. Check connection.")

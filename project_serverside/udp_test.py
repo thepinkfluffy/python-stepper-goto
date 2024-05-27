@@ -2,7 +2,7 @@ import socket
 def sendMessage(message):
 	msgFromClient       = message
 	bytesToSend         = str.encode(msgFromClient)
-	serverAddressPort   = ("192.168.68.71", 20001)
+	serverAddressPort   = ("192.168.68.72", 20001)
 	bufferSize          = 1024
 	UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 	UDPClientSocket.settimeout(2)

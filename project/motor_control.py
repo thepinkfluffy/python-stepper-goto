@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 import sys
+GPIO.setwarnings(False)
 #wiring
 step = 15
 direction = 14
@@ -22,6 +23,7 @@ GPIO.setup(ms2,GPIO.OUT)
 GPIO.setup(ms1,GPIO.OUT)
 GPIO.setup(step2,GPIO.OUT)
 GPIO.setup(dir2,GPIO.OUT)
+
 #Pulls the enable pin high. Puts controllers into sleep mode. 
 def disable(x):
 	if(x==1):
@@ -92,7 +94,7 @@ def move(Direction,Speed,Motor,StepsPerSec,degrees):
 	else:
 		raise Exception("Argument invalid. Motor selection has to be 1 or 2.")
 	disable(1)
-if (__name__ == __main__):
+if (__name__ == "__main__"):
 	condition = sys.argv[1]
 	if (condition == "disable"):
 		disable(1)
