@@ -1,6 +1,5 @@
-
 from flask import Flask, redirect, url_for , render_template, flash, request 
-from udp_test import sendMessage
+from udp_test import sendMessage, setTimeout
 import threading
 import time
 
@@ -14,13 +13,18 @@ speed  = 1 # masodpercbeli lepesek szama * 100
 step_num  =1 #half step, etc
 degrees = 40
 #rendering the HTML page which has the button
+timeout = False
 def updateDegrees(degrees):
     mystring = "deg"+str(degrees)
-    sendMessage(mystring)
     if (sendMessage(mystring) is True):
         print("Confirmed updated degrees to "+str(degrees))
     else:
         print("Handshake not received. Check connection.")
+    if(abs(degrees) > 720):
+        timeout = True
+    else:
+        timeout = False
+    setTimeout(timeout)
 def moveTo(gopos):
     global pos
     print("going to " + str(gopos))
@@ -29,7 +33,7 @@ def moveTo(gopos):
     motor1_displacement = 0
     #masodik tengely 
     delta2 = (pos[1]-gopos[1])
-    print("delta = "+str(delta1,delta2))
+    print("delta = "+str(delta1)+","+str(delta2))
     motor2_displacement = 0
     #atalakitjuk a koordinatakat stepper fokokba
     f1 = 12 #amugy nem ennyi 
@@ -48,7 +52,7 @@ def moveTo(gopos):
         print("Confirmed movement executed.")
     else:
         print("Handshake not received. Check connection.")
-    print("motor displacements: "+str(motor1_displacement,motor2_displacement))
+    print("motor displacements: "+str(motor1_displacement)+","+str(motor2_displacement))
     return pos
 
 @app.route('/refresh')

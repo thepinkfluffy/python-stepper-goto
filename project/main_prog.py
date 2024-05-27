@@ -25,10 +25,12 @@ while(True):
 		bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
 		message = bytesAddressPair[0]
 		address = bytesAddressPair[1]
-		clientMsg = str(message)[2]
-		print(clientMsg)
-		print("socket received: "+clientMsg)
-		print("yes")
+		if(str(message)[:5] == "b'deg"):
+			degrees = float(str(message).strip("b'deg"))
+			print("received new degrees "+str(degrees))
+		else:
+			clientMsg = str(message)[2]
+			print("socket received: "+clientMsg)
 		isMessage = True
 	except:
 		pass
@@ -72,9 +74,6 @@ while(True):
 			UDPServerSocket.sendto(bytesToSend ,address)
 		except:
 			pass
-	if(clientMsg[:3]=="deg"):
-		degrees = float(clientMsg[3:])
-		print("received new degrees "+str(degrees))
 	if (isMessage):
 		try:
 			UDPServerSocket.sendto(bytesToSend ,address)

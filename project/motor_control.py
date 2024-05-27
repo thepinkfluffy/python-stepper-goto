@@ -12,7 +12,7 @@ ms1 =8
 step2 = 23
 dir2 = 18
 def anglesToSteps(alpha,stp):
-	return((2**(stp-1))*alpha/1.8)
+	return((2**(stp-1))*abs(alpha)/1.8)
 #gpio setup
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(step,GPIO.OUT)
@@ -41,7 +41,7 @@ def move(Direction,Speed,Motor,StepsPerSec,degrees):
 	#steps to degrees 
 	#1 full step = 1.8
 	steps = anglesToSteps(degrees,Speed)
-	print(degrees,steps)
+	#print(degrees,steps)
 	enable(1)
 	if(Speed==1):#full
 			GPIO.output(ms1,GPIO.LOW)
