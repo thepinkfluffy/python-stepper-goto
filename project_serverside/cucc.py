@@ -216,4 +216,4 @@ def get_angle():
     updateDegrees(degrees)
     return redirect("/json")
 
-app.run(host="0.0.0.0")
+app.run(host="0.0.0.0",port = 5001)
