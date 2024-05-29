@@ -2,7 +2,7 @@ from flask import Flask, redirect, url_for , render_template, flash, request
 from udp_test import sendMessage, setTimeout
 import threading
 import time
-
+# 360Fok/ 24 ora , 360/ 86400 , 0.00416 fok/s (teleszkop),1.085 fok/s (motor)
 app = Flask(__name__)
 app.secret_key = 'BardosAnyjaASzerelmem'
 pos = (0,0)
@@ -14,6 +14,25 @@ step_num  =1 #half step, etc
 degrees = 40
 #rendering the HTML page which has the button
 timeout = False
+#tracking function
+def Track():
+    #compensating for untracked time from calibration or track stop
+    t1 = time.time()
+    deltaT = t1-t0
+    deltaA = deltaT* 1.085
+    updateDegrees(deltaA)
+    up()
+    #change step to eighth step
+    step4()
+    updateDegrees(138240) #random nagy szam
+    speedT()
+    up()
+def stopTrack():
+    stop()
+    t0= time.time()
+    speed3()
+    updateDegrees(500)
+
 def updateDegrees(degrees):
     mystring = "deg"+str(degrees)
     if (sendMessage(mystring) is True):
@@ -164,6 +183,11 @@ def speed5():
     sendMessage("a")
     print("Step frequency changed to 800.")
     return redirect("/json")
+def speedT():
+    global speed
+    sendMessage("T")
+    print("Step frequency changed to tracking speed.")
+    return redirect("/json")
 
 @app.route('/step1')
 def step1():
@@ -196,6 +220,7 @@ def step4():
 
 @app.route('/data', methods=['POST'])
 def get_calibration():
+    t0 = time.time()
     global pos
     nums = (float(request.form['number']),float(request.form['number2']))
     pos = nums
