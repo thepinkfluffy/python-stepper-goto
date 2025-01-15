@@ -171,9 +171,21 @@
 </script>
 <script type=text/javascript>
         $(function() {
-          $('a#step4').on('click', function(e) {
+          $('a#step3').on('click', function(e) {
             e.preventDefault()
-            $.getJSON('/step4',
+            $.getJSON('/step3',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+        });
+</script>
+<script type=text/javascript>
+        $(function() {
+          $('a#track').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/track',
                 function(data) {
               //do nothing
             });
@@ -259,6 +271,12 @@
         <div style = "position:absolute;left:340px;top:400px">
         <form>
             <a href=# id=step4><button class='btn btn-default'>Eighth Step</button></a>
+        </form>
+        </div>
+        </div>
+        <div style = "position:absolute;left:500px;top:400px">
+        <form>
+            <a href=# id=track><button class='btn btn-default'>Start tracking</button></a>
         </form>
         </div>
             </div>

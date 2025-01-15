@@ -15,7 +15,11 @@ degrees = 40
 #rendering the HTML page which has the button
 timeout = False
 #tracking function
+t0 = 0
+@app.route("/track")
 def Track():
+    global t0
+    print("starting tracking")
     #compensating for untracked time from calibration or track stop
     t1 = time.time()
     deltaT = t1-t0
@@ -27,7 +31,9 @@ def Track():
     updateDegrees(138240) #random nagy szam
     speedT()
     up()
+    return redirect("/json")
 def stopTrack():
+    global t0
     stop()
     t0= time.time()
     speed3()

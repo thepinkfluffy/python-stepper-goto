@@ -60,6 +60,8 @@ while(True):
 		stepsPerSec =500
 	if(clientMsg=="a"):
 		stepsPerSec = 800
+	if(clientMsg=="T"):
+		stepsPerSec= 7.1104
 
 	if(clientMsg=="b"):
 		step = 1
